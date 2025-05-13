@@ -28,12 +28,10 @@ export const register = async (req, res) => {
 
     await sendMail(email, subject, text);
 
-    res
-      .status(201)
-      .json({
-        message: "OTP sent to email. Verify your account.",
-        success: true,
-      });
+    res.status(201).json({
+      message: "OTP sent to email. Verify your account.",
+      success: true,
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
@@ -57,7 +55,12 @@ export const verifyUser = async (req, res) => {
     await user.save();
 
     const token = user.generateToken();
-    res.cookie("token", token, { httpOnly: true, maxAge: 60 * 60 * 1000 });
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 1000,
+      secure: true,
+      sameSite: "None",
+    });
 
     res
       .status(200)
@@ -224,8 +227,8 @@ export const login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       maxAge: 60 * 60 * 1000,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      secure: true,
+      sameSite: "None",
     });
 
     res.status(200).json({ message: "Login successful", success: true, user });
