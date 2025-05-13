@@ -5,7 +5,7 @@ import upload from '../middleware/multerConfig.js';
 const router = express.Router();
 
 router.post('/add-doctor',upload.single("doctorImage"),auth,addDoctor);
-router.get('/get-doctors',auth,getDoctors);
+router.get('/get-doctors',getDoctors);
 router.delete('/delete-doctors/:id',auth,deleteDoctor);
 router.put('/edit-doctors/:id',upload.single("doctorImage"),auth,editDoctor);
 

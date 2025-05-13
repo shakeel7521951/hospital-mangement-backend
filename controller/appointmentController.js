@@ -2,7 +2,8 @@ import Appointment from '../Models/Appointent.js';
 
 export const createAppointment = async (req, res) => {
   try {
-    const { name, email, date, time, doctor, reason } = req.body;
+    const { name,  date, time, doctor, reason } = req.body;
+    const {email} = req.user;
 
     if (!name || !email || !date || !time || !doctor) {
       return res.status(400).json({ message: "Please fill in all required fields." });
