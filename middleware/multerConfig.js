@@ -4,7 +4,6 @@ import multer from "multer";
 
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
-
 // Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -14,6 +13,7 @@ cloudinary.config({
 
 // Configure Multer with Cloudinary Storage
 const storage = new CloudinaryStorage({
+  
   cloudinary: cloudinary,
   params: {
     folder: "profiles",
